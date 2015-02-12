@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace c_sharp_1 {
+    class calc
+    {
+        private int tal1;
+        private int tal2;
+        private char op;
+
+        public calc()
+        {
+            tal1 = 0;
+            tal2 = 0;
+            op = '\0';
+        }
+
+        public void Set1(int t1)
+        {
+            tal1 = t1;
+        }
+
+        public void Set2(int t2)
+        {
+            tal2 = t2;
+        }
+
+        public void Setc(char c1)
+        {
+            op = c1;
+        }
+
+        public void calculation()
+        {
+            switch (op)
+            {
+                case '+':
+                    Console.WriteLine("{0} + {1} = {2}", tal1, tal2, tal1 += tal2);
+                    break;
+                case '-':
+                    Console.WriteLine("{0} - {1} = {2}", tal1, tal2, tal1 -= tal2);
+                    break;
+                case '*':
+                    Console.WriteLine("{0} * {1} = {2}", tal1, tal2, tal1 *= tal2);
+                    break;
+                case '/':
+                    Console.WriteLine("{0} / {1} = {2}", tal1, tal2, tal1 /= tal2);
+                    break;
+                default:
+                    Console.WriteLine("Ukendt operator: '{0}'!\n", op);
+                    break;
+            }
+        }
+
+
+    }
+
+
+    class Program {
+        static void Main(string[] args) {
+            Console.WriteLine("Sæt operatør som 'x' eller 'X' for at afslutte!");
+            calc ulator = new calc();
+            Console.Write("Indtast første tal: ");
+            int t1 = Convert.ToInt32(Console.ReadLine());
+            ulator.Set1(t1);
+
+            while (true)
+            {
+                Console.Write("Indtast operatør: ");
+                char c = Convert.ToChar(Console.ReadLine());
+                if ((c == 'x') || (c == 'X')) return;
+                ulator.Setc(c);
+
+                Console.Write("Indtast andet tal: ");
+                int tmp = Convert.ToInt32(Console.ReadLine());
+                ulator.Set2(tmp);
+
+                ulator.calculation();
+
+            }
+
+        }
+    }
+}
