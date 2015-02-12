@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace c_sharp_1 {
+    class Program {
+        static int calc(int tal1, char op, int tal2)
+        {
+            switch (op)
+            {
+                case '+':
+                    Console.WriteLine("{0} + {1} = {2}", tal1, tal2, tal1 += tal2);
+                    return tal1;
+                case '-':
+                    Console.WriteLine("{0} - {1} = {2}", tal1, tal2, tal1 -= tal2);
+                    return tal1;
+                case '*':
+                    Console.WriteLine("{0} * {1} = {2}", tal1, tal2, tal1 *= tal2);
+                    return tal1;
+                case '/':
+                    Console.WriteLine("{0} / {1} = {2}", tal1, tal2, tal1 /= tal2);
+                    return tal1;
+                default:
+                    Console.WriteLine("Ukendt operator: '{0}'!\n", op);
+                    return tal1;
+            }
+        }
+
+
+        static void Main(string[] args) {
+            Console.WriteLine("Skriv 'x' under operator for at afslutte!");
+            Console.Write("Indsæt første tal: ");
+            int tal1 = Convert.ToInt32(Console.ReadLine());
+
+            while (true)
+            {
+                Console.Write("Indsæt operator: ");
+                char op = Convert.ToChar(Console.ReadLine());
+
+                if ((op == 'x') || (op == 'x'))
+                {
+                    return;
+                }
+
+                Console.Write("Indsæt andet tal: ");
+                int tal2 = Convert.ToInt32(Console.ReadLine());
+                tal1 = calc(tal1, op, tal2);
+                Console.WriteLine("\n\nFørste tal er: {0} ", tal1);
+            } 
+
+
+        }
+    }
+}
