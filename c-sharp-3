@@ -1,0 +1,167 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace c_sharp_1
+{
+
+    public class calc
+    {
+        protected double val1;
+        protected double val2;
+        protected char operation;
+        protected bool truefalse;
+
+        public calc()
+        {
+            val1 = 0;
+            val2 = 0;
+            operation = '\0';
+            truefalse = true;
+        }
+
+        public void plus()
+        {
+            Console.Write("Indsæt tal: ");
+            val2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("{0} + {1} = {2}", val1, val2, val1 += val2);
+        }
+        public void minus()
+        {
+            Console.Write("Indsæt tal: ");
+            val2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("{0} - {1} = {2}", val1, val2, val1 -= val2);
+        }
+        public void gange()
+        {
+            Console.Write("Indsæt tal: ");
+            val2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("{0} * {1} = {2}", val1, val2, val1 *= val2);
+        }
+        public void divider()
+        {
+            Console.Write("Indsæt tal: ");
+            val2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("{0} / {1} = {2}", val1, val2, val1 /= val2);
+        }
+
+        public void SetVal1(double value) { val1 = value; }
+        public void SetOperation(char oper) { operation = oper; }
+        public void SetBool() { truefalse = false; }
+        public bool Retbool() { return truefalse; }
+
+        public void operators()
+        {
+            switch (operation)
+            {
+                case '*':
+                    gange();
+                    break;
+                case '/':
+                    divider();
+                    break;
+                case '+':
+                    plus();
+                    break;
+                case '-':
+                    minus();
+                    break;
+                case 'x':
+                    SetBool();
+                    break;
+                case 'X':
+                    SetBool();
+                    break;
+                default:
+                    Console.WriteLine("Ukendt operatør: '{0}'!", operation);
+                    break;
+            }
+        }
+
+    }
+
+    public class advcal : calc
+    {
+        public void OpI()
+        {
+            Console.Write("Indsæt tal: ");
+            val2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("{0}^{1} = {2}", val1, val2, val1 = Math.Pow(val1, val2));
+
+        }
+        public void kvadratrod()
+        {
+            Console.WriteLine("_{0} = {1}", val1, Math.Sqrt(val1));
+        }
+        public void advoper()
+        {
+            switch (operation)
+            {
+                case '^':
+                    OpI();
+                    break;
+                case '_':
+                    kvadratrod();
+                    break;
+                default:
+                    operators();
+                    break;
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.Write("Choose between [A]dvanceret eller [B]asic: ");
+                char option = Convert.ToChar(Console.ReadLine());
+
+                if ((option == 'a') || (option == 'A'))
+                {
+                    Console.WriteLine("For at påbegynde nyt regnestykke indsæt 'x' eller 'X' som operatør!");
+                    advcal calc = new advcal();
+                    Console.WriteLine("Operations: '*', '/', '+', '-', '^', '_' (kvadratrod)");
+                    Console.Write("Choose operation: ");
+                    calc.SetOperation(Convert.ToChar(Console.ReadLine()));
+
+
+                    Console.Write("Indsæt første tal: ");
+                    calc.SetVal1(Convert.ToDouble(Console.ReadLine()));
+                    while (calc.Retbool())
+                    {
+                        calc.advoper();
+                        Console.Write("Choose operation: ");
+                        calc.SetOperation(Convert.ToChar(Console.ReadLine()));
+                    }
+                }
+                else if ((option == 'b') || (option == 'B'))
+                {
+                    Console.WriteLine("For at påbegynde nyt regnestykke indsæt 'x' eller 'X' som operatør!");
+                    calc ulator = new calc();
+                    Console.WriteLine("Operations: '*', '/', '+', '-'");
+                    Console.Write("Choose operation: ");
+                    ulator.SetOperation(Convert.ToChar(Console.ReadLine()));
+                    
+                    Console.Write("Indsæt første tal: ");
+                    ulator.SetVal1(Convert.ToDouble(Console.ReadLine()));
+
+                    while (ulator.Retbool())
+                    {
+                        ulator.operators();
+                        Console.Write("Choose operation: ");
+                        ulator.SetOperation(Convert.ToChar(Console.ReadLine()));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Vælg venlist mellem Advanceret eller Basic!");
+                }
+            }
+        }
+    }
+}
